@@ -3,7 +3,9 @@ import logo from './logo.svg';
 import {Router, BrowserRouter, Switch, Route} from 'react-router-dom'
 import './App.css';
 import Header from './Components/Header/Header'
-
+import Clock from './Components/Clock/Clock'
+import Settings from './Components/Settings/Settings'
+import Alarm from './Components/Alarm/Alarm';
 
 
 function App() {
@@ -23,13 +25,14 @@ function App() {
         <Switch>
           
           <Route path='/alarm'>
-            <Header/>
+            <Alarm/>
           </Route>
 
           <Route path='/'>
-            asd
+            <Clock/>
           </Route>
         </Switch>
+        <Settings/>
       </div>
     </BrowserRouter>
   );
