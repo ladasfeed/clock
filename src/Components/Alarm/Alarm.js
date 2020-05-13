@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import './Alarm.css'
 import AlarmElement from './AlarmElement/AlarmElement'
+import SetAlarmFirst from './SetAlarmFirst/SetAlarmFirst'
 let isDidMount = false;
 
-function Alarm() {
+function Alarm(props) {
 
     const [tempTime, setTempTime] = useState('');
 
@@ -74,13 +75,13 @@ function Alarm() {
 
     return (
         <div className="clock_wrapper">
+           
             <div className="main_clock">
                 <div className="show_alarms-wrapper">
                     <div onClick={showAlarms} className="show_alarms_button">Show</div>
-                    <AlarmElement/>
-                    <AlarmElement/>
-                    <AlarmElement/>
-                    <AlarmElement/>
+                    {props.arrayOfAlarms.map(item => {
+                        return <AlarmElement alarmElement = {item} />
+                    })}
                 </div>
                 <div className="circle_clock">
                     <div className="second_arrow">
@@ -98,7 +99,7 @@ function Alarm() {
                    </div>
 
                    <div className="set_alarm_window-first">
-                        Hello
+                        <SetAlarmFirst addAlarm = {props.addAlarm}/>
                    </div>
                    <div className="set_alarm_window-second">
 

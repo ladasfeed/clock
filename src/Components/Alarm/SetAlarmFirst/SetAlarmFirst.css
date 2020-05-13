@@ -1,0 +1,32 @@
+.set_alarm_first {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.set_alarm_hours_wrapper, .set_alarm_minutes_wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.set_alarm_hours_heading, .set_alarm_minutes_heading {
+    text-transform: uppercase;
+    margin-right: 20px;
+}
+
+.set_alarm_first_button {
+    cursor: pointer;
+}
+
+.set_alarm_hours {
+    
+}
+
+.set_alarm_minutes {
+   
+}

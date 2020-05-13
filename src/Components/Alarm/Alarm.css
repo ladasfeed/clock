@@ -29,12 +29,19 @@
 }
 
 .set_alarm_window-first {
+    box-sizing: border-box;
     flex:1;
+    padding: 20px 30px;
     transition: .5s;
     transform-origin: top;
     transform: scaleY(0);
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
     color: white;
     min-height: 200px;
+}
+
+.set_alarm_first input {
+    max-width: 60%;
 }
