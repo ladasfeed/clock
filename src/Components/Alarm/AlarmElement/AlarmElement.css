@@ -1,0 +1,7 @@
+.alarm_element {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px 40px;
+    box-sizing: border-box;
+}

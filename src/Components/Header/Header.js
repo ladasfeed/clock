@@ -11,12 +11,14 @@ function Header() {
                 <Link to='./'>
                     <div className="header_item">
                         <img src={require('../../img/alarm.png')}></img>
+                        <div className="header_item_underline">Clock</div>
                     </div>
                 </Link>
 
                 <Link to='./alarm'>
                     <div className="header_item">
                         <img src={require('../../img/alarm.png')}></img>
+                        <div className="header_item_underline">Alarm</div>
                     </div>
                 </Link>
 
@@ -24,12 +26,14 @@ function Header() {
                 <Link to='./timer'>
                     <div className="header_item">
                         <img src={require('../../img/alarm.png')}></img>
+                        <div className="header_item_underline">Timer</div>
                     </div>
                 </Link>
 
                 <Link to='./sec'>
                     <div className="header_item">
                         <img src={require('../../img/alarm.png')}></img>
+                        <div className="header_item_underline">Seconds</div>
                     </div>
                 </Link>
             </div>

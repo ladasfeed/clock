@@ -3,11 +3,18 @@ import './Clock.css'
 
 let isDidMount = false;
 
-function Clock() {
+class Clock  extends React.Component{
 
-    const [tempTime, setTempTime] = useState('');
+    constructor(props) {
+        super(props);
+        this.state = {
+          tempTime: ''
+        };
+      }
 
-    function updateClock() {
+   // const [tempTime, setTempTime] = useState('');
+
+    updateClock() {
         let date = new Date();
         let sArrow = document.querySelector('.second_arrow');
         let mArrow = document.querySelector('.minutes_arrow');
@@ -40,46 +47,55 @@ function Clock() {
 
         let newTime = hours+':'+minutes+':'+seconds 
         
-        setTempTime(newTime)
+       // this.setTempTime(newTime)
+        this.setState({
+            tempTime: newTime
+        })
     }
 
 
     
 
-    useEffect(() => {
-        if (!isDidMount) {
-            setInterval(() => updateClock(), 1000)
-            isDidMount=true;
-        }
-    })
+    // useEffect(() => {
+    //     if (!isDidMount) {
+    //         setInterval(() => updateClock(), 1000)
+    //         isDidMount=true;
+    //     }
+    // })
+
+    componentDidMount() {
+        setInterval(() => this.updateClock(), 1000)
+    }
 
 
 
 
-    return (
-        <div className="clock_wrapper">
-            <div className="main_clock">
-                <div className="circle_clock">
-                    <div className="second_arrow">
-
-                    </div>
-                    <div className="minutes_arrow">
-
-                    </div>
-                    <div className="hours_arrow">
-
-                    </div>
-                    <div className="clock_dot">
-
+    render() {
+        return (
+            <div className="clock_wrapper">
+                <div className="main_clock">
+                    <div className="circle_clock">
+                        <div className="second_arrow">
+    
+                        </div>
+                        <div className="minutes_arrow">
+    
+                        </div>
+                        <div className="hours_arrow">
+    
+                        </div>
+                        <div className="clock_dot">
+    
+                        </div>
                     </div>
                 </div>
+                <div className="temp_time">
+                    {this.state.tempTime}
+                </div>
             </div>
-            <div className="temp_time">
-                {tempTime}
-            </div>
-        </div>
-
-    )
+    
+        )
+    } 
 }
 
 export default Clock;

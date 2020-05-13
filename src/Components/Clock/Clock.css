@@ -7,6 +7,14 @@
 }
 
 
+.main_clock {
+    display: flex;
+    align-items: flex-start;
+    align-items: stretch;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
 .circle_clock {
     position: relative;
     width: 500px;

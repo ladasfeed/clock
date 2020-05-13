@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './Alarm.css'
-
+import AlarmElement from './AlarmElement/AlarmElement'
 let isDidMount = false;
 
 function Alarm() {
@@ -54,24 +54,55 @@ function Alarm() {
     })
 
 
+    function showSetAlarm() {
+        let AlarmWindow = document.querySelector('.set_alarm_window-first');
+        if (AlarmWindow.style.transform == 'scaleY(0)' || !AlarmWindow.style.transform)
+            AlarmWindow.style.transform = 'scaleY(1)'
+        else 
+        AlarmWindow.style.transform = 'scaleY(0)'
+    }
+
+
+    function showAlarms() {
+        let list = document.querySelector('.show_alarms-wrapper');
+        if (list.style.height == '30px'|| !list.style.height)
+            list.style.height = '274px';
+        else 
+            list.style.height = '30px'
+    }
 
 
     return (
         <div className="clock_wrapper">
             <div className="main_clock">
+                <div className="show_alarms-wrapper">
+                    <div onClick={showAlarms} className="show_alarms_button">Show</div>
+                    <AlarmElement/>
+                    <AlarmElement/>
+                    <AlarmElement/>
+                    <AlarmElement/>
+                </div>
                 <div className="circle_clock">
                     <div className="second_arrow">
-
                     </div>
                     <div className="minutes_arrow">
-
                     </div>
                     <div className="hours_arrow">
-
                     </div>
                     <div className="clock_dot">
-
                     </div>
+                </div>
+                <div className="set_alarms-wrapper">
+                   <div onClick={showSetAlarm} className="set_alarm_title">
+                       Set alarm
+                   </div>
+
+                   <div className="set_alarm_window-first">
+                        Hello
+                   </div>
+                   <div className="set_alarm_window-second">
+
+                   </div>
                 </div>
             </div>
             <div className="temp_time">
