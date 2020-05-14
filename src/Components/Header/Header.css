@@ -6,10 +6,15 @@
 
 
 .header_item {
+   
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+}
+.header_item img {
+    max-width: 60px;
+    height: auto;
 }
 
 .header_item_underline {
@@ -31,3 +36,7 @@
     padding: 8px;
 }
 
+
+.header_wrapper {
+    transition: .8s;
+}

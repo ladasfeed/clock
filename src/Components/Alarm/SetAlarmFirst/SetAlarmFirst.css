@@ -23,10 +23,10 @@
     cursor: pointer;
 }
 
-.set_alarm_hours {
-    
+.set_alarm_hours, .set_alarm_minutes {
+    border: none;
+    background-color: rgba(#fff, #fff,#fff, 0.5);
+    border-radius: 5px;
 }
 
-.set_alarm_minutes {
-   
-}
+ 

@@ -8,6 +8,7 @@ function Settings(props) {
     let [tempSettings, setTempSettings] = useState('Background');
     let [isDidMount, setIsDidMount] = useState(false);
     let [isBgMusicPlaying, setIsBgMusicPlaying] = useState(false);
+    let [isFullscreen, setIsFullscreen] = useState(false);
 
     useEffect(()=> {
         if (!isDidMount) {
@@ -87,6 +88,16 @@ function Settings(props) {
         let newSrc = event.target.getAttribute('src');
         document.querySelector('.app').style.background = `url(${newSrc})`
      }
+
+     function fullscreen() {
+         if (!isFullscreen) {
+            document.documentElement.webkitRequestFullScreen();
+            setIsFullscreen(true)
+         } else {
+            document.webkitCancelFullScreen();
+            setIsFullscreen(false)
+         }
+     }
  
 
     return (
@@ -131,8 +142,13 @@ function Settings(props) {
                     </div>
                 </div>
             </div>
-            <div style={{color: props.mainColor}} onClick={showSettings} className="settings_button">
-                Settings
+            <div className="settings_buttons_wrapper">
+                <div style={{color: props.mainColor}} onClick={showSettings} className="settings_button">
+                    Settings
+                </div>
+                <div style={{color: props.mainColor}} onClick={fullscreen} className="fullscreen_button">
+                    {isFullscreen ? 'Windowed' : 'Fullscreen'}
+                </div>
             </div>
         </div>
     )

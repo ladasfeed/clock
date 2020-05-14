@@ -20,9 +20,11 @@
 .show_alarms_button {
     cursor: pointer;
     font-size: 24px;
+    transition: .8s;
 }
 
 .set_alarm_title {
+    transition: .8s;
     cursor: pointer;
     font-size: 24px;
     flex:0;

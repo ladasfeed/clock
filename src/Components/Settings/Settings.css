@@ -103,3 +103,17 @@
 .global_color_changer-button {
     cursor: pointer;
 }
+
+.fullscreen_button {
+    position: absolute;
+    right: 40px;
+    cursor: pointer;
+}
+
+.settings_buttons_wrapper {
+    padding: 0px 40px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
