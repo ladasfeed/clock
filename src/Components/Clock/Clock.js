@@ -68,28 +68,29 @@ class Clock  extends React.Component{
     }
 
 
-
+   
 
     render() {
+        
         return (
             <div className="clock_wrapper">
                 <div className="main_clock">
-                    <div className="circle_clock">
-                        <div className="second_arrow">
+                <div style={{border: '4px solid ' + this.props.mainColor}} className="circle_clock">
+                        <div style={{backgroundColor: this.props.mainColor}}   className="second_arrow">
     
                         </div>
-                        <div className="minutes_arrow">
+                        <div style={{backgroundColor: this.props.mainColor}}  className="minutes_arrow">
     
                         </div>
-                        <div className="hours_arrow">
+                        <div style={{backgroundColor: this.props.mainColor}}  className="hours_arrow">
     
                         </div>
-                        <div className="clock_dot">
+                        <div style={{backgroundColor: this.props.mainColor}}  className="clock_dot">
     
                         </div>
                     </div>
                 </div>
-                <div className="temp_time">
+                <div style={{color: this.props.mainColor}} className="temp_time">
                     {this.state.tempTime}
                 </div>
             </div>

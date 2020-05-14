@@ -1,0 +1,32 @@
+.alarm_popup_wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 50px;
+    text-transform: uppercase;
+    color: white;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.alarm_popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.alarm_popup_time_wrapper {
+    margin-bottom: 30px;
+    font-size: 40px;
+}
+
+.alarm_popup_close_button {
+    cursor: pointer;
+    text-shadow: 0 0 5px white;
+}

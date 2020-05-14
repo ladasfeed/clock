@@ -7,6 +7,8 @@ function SetAlarmFirst(props) {
     function addAlarm() {
         let time = document.querySelector('.set_alarm_hours').value + ':' + document.querySelector('.set_alarm_minutes').value;
         props.addAlarm({time});
+        props.showAlarms();
+        props.showAlarms();
     }
 
 

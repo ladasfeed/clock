@@ -47,13 +47,7 @@ function Alarm(props) {
 
     
 
-    useEffect(() => {
-        if (!isDidMount) {
-            setInterval(() => updateClock(), 1000)
-            isDidMount=true;
-        }
-    })
-
+    
 
     function showSetAlarm() {
         let AlarmWindow = document.querySelector('.set_alarm_window-first');
@@ -67,10 +61,18 @@ function Alarm(props) {
     function showAlarms() {
         let list = document.querySelector('.show_alarms-wrapper');
         if (list.style.height == '30px'|| !list.style.height)
-            list.style.height = '274px';
+            list.style.height = props.arrayOfAlarms.length*61+30+'px';
         else 
             list.style.height = '30px'
     }
+
+    useEffect(() => {
+        if (!isDidMount) {
+            setInterval(() => updateClock(), 1000)
+            isDidMount=true;
+        }
+    })
+
 
 
     return (
@@ -83,14 +85,18 @@ function Alarm(props) {
                         return <AlarmElement alarmElement = {item} />
                     })}
                 </div>
-                <div className="circle_clock">
-                    <div className="second_arrow">
+                <div style={{border: '4px solid ' + props.mainColor}} className="circle_clock">
+                    <div style={{backgroundColor: props.mainColor}}   className="second_arrow">
+
                     </div>
-                    <div className="minutes_arrow">
+                    <div style={{backgroundColor: props.mainColor}}  className="minutes_arrow">
+
                     </div>
-                    <div className="hours_arrow">
+                    <div style={{backgroundColor: props.mainColor}}  className="hours_arrow">
+
                     </div>
-                    <div className="clock_dot">
+                    <div style={{backgroundColor: props.mainColor}}  className="clock_dot">
+
                     </div>
                 </div>
                 <div className="set_alarms-wrapper">
@@ -99,14 +105,14 @@ function Alarm(props) {
                    </div>
 
                    <div className="set_alarm_window-first">
-                        <SetAlarmFirst addAlarm = {props.addAlarm}/>
+                        <SetAlarmFirst addAlarm = {props.addAlarm} showAlarms={showAlarms}/>
                    </div>
                    <div className="set_alarm_window-second">
 
                    </div>
                 </div>
             </div>
-            <div className="temp_time">
+            <div style={{color: props.mainColor}} className="temp_time">
                 {tempTime}
             </div>
         </div>
