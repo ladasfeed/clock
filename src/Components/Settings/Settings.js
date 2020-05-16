@@ -41,27 +41,6 @@ function Settings(props) {
         event.target.style.color = 'white'
      }
 
-
-   
-    
-
-
-     /*
-     function renderSettingsContent() {
-         switch (tempSettings) {
-             case 'Background': {
-                return (
-                   
-                )
-             }
-             case 'globalColor': {
-                return (
-                    
-                )
-             }
-         }
-     }*/
-
      
 
      function changeSettigns(event, translate) {
@@ -117,6 +96,7 @@ function Settings(props) {
                     </div>
                     <div className="settings_slider_wrapper">
                         <div className="settings_slider_element">
+                            <input type="file" name="f"></input>
                             <div className="settings_change_bg">
                                 <img onClick={(event) => changeBackground(event)} src={require('../../img/Background.png')}></img>
                                 <img onClick={(event) => changeBackground(event)} src={require('../../img/bg2.jpeg')}></img>

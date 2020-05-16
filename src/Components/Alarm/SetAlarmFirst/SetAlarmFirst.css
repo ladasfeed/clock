@@ -22,13 +22,16 @@
 
 .set_alarm_first_button {
     cursor: pointer;
+    font-size: 20px;    
+    transition: .3s;
+    position: absolute;
+    bottom: 30px;
 }
 
-.set_alarm_minutes {
-    border: none;
-    background-color: rgba(#fff, #fff,#fff, 0.5);
-    border-radius: 5px;
+.set_alarm_first_button:hover {
+    transform: scale(1.15);
 }
+
 
  .set_alarm_selector {
      margin: 0px 10px;
@@ -44,7 +47,7 @@
     max-width: 60%;
 }
 
-.set_alarm_hours_wrapper_inner {
+.set_alarm_hours_wrapper_inner, .set_alarm_minutes_wrapper_inner {
     width: 100%;
     max-width: 60%;
     display: flex;
@@ -59,4 +62,71 @@
 
 .set_alarm_controller:hover{
     text-shadow: 0px 0px 5px white;
+}
+
+.set_alarm_hours, .set_alarm_minutes {
+    border-radius: 10px;
+    margin: 0px 15px;
+    text-align: center;
+}
+
+.set_alarm_hours:focus {
+    outline: none;
+}
+
+.set_alarm_minutes:focus {
+    outline: none;
+}
+
+/*selector*/
+.set_alarm_days_selector {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.set_alarm_days_selector__element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/**/
+
+.show_alarms_button, .set_alarm_title {
+    cursor: pointer;
+    font-size: 24px;
+    transition: .8s;
+    transition: .3s;
+}
+
+.show_alarms_button:hover {
+    transform: scale(1.15);
+}
+
+.set_alarm_title:hover {
+    transform: scale(1.15)
+    !important;
+}
+
+/*music*/
+.set_alarm_first__music {
+    display: flex;
+    width: 100%;
+    margin-top: 40px;
+}
+
+
+.set_alarm_first__music__selector {
+    width: 100%;
+    margin-right: 40px;
+}
+.set_alarm_first__music select {
+    width: 100%;
+    flex: 1
+}
+
+.set_alarm_first__music__play-button  {
+    flex: 0
 }

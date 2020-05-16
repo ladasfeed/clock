@@ -6,11 +6,12 @@
 
 
 .header_item {
-   
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+
+    transition: .3s;
 }
 .header_item img {
     max-width: 60px;
@@ -34,6 +35,10 @@
     width: 60px;
     
     padding: 8px;
+}
+
+.header_item:hover {
+    transform: scale(1.15);
 }
 
 

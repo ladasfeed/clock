@@ -120,7 +120,7 @@ class Alarm extends React.Component {
                        </div>
     
                        <div className="set_alarm_window-first">
-                            <SetAlarmFirst addAlarm = { this.props.addAlarm} showAlarms={() => this.showAlarms()}/>
+                            <SetAlarmFirst setAlarmMusic={this.props.setAlarmMusic} addAlarm = { this.props.addAlarm} showAlarms={() => this.showAlarms()}/>
                        </div>
                        <div className="set_alarm_window-second">
     

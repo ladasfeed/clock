@@ -34,7 +34,7 @@ class Header extends React.Component {
     setTimerCloseHeader() {
 
         document.querySelector('.header_wrapper').style.transform = 'translateY(0px)'
-        document.querySelector('.settings_wrapper').style.transform = 'translateY(0px)'
+        document.querySelector('.settings_wrapper').style.transform = 'none'
 
         if  (document.querySelector('.show_alarms-wrapper')) {
             document.querySelector('.show_alarms-wrapper').style.transform = 'translateY(0px)'
@@ -46,7 +46,7 @@ class Header extends React.Component {
 
         clearTimeout(this.state.timerId)
         this.setState({
-            timerId: setTimeout(()=>this.closeHeader(), 10000)
+            timerId: setTimeout(()=>this.closeHeader(), 30000)
         })
 
         
@@ -66,7 +66,7 @@ class Header extends React.Component {
         {
             console.log(this.state.func, this.state.didMount)
             document.addEventListener('mousemove', this.state.func)
-            setTimeout(()=>this.closeHeader(), 10000)
+            setTimeout(()=>this.closeHeader(), 30000)
             this.setState({
                 help: true
             })

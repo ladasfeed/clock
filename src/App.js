@@ -11,7 +11,8 @@ import AlarmPopup from './Components/Alarm/AlarmPopup/AlarmPopup';
 let arrayOfAlarms = [
   {
     time: '15:5',
-    offedToday: false
+    offedToday: false,
+    days: [1, 2]
   }
 ]
 
@@ -23,7 +24,7 @@ function App() {
   let [isAlarmNow, setIsAlarmNow] = useState(false);
   let [mainColor, setMainColor] = useState('black');
   let [userData, setUserData]= useState();
-
+  let [alarmMusic, setAlarmMusic] = useState('Hans - pol anthem')
 
   function getUserData() {
     let tempUserData = JSON.parse(localStorage.getItem('clocks'))
@@ -42,7 +43,7 @@ function App() {
     clearInterval(idOfAlarmFunc)
     setIdOfAlarmFunc(setInterval(checkAlarm, 1000));
 
-      let newUserState;
+    let newUserState;
     if (!userData) {
       newUserState = {
         alarms: []
@@ -71,9 +72,17 @@ function App() {
     arrayOfAlarms.forEach(item => {
       console.log(item.time, ' ', tempTime)
       if (item.time == tempTime && !item.offedToday) {
-        document.querySelector('#audio').play();
-        setIsAlarmNow(item);
-        item.offedToday = true;
+        let daysValid = false;
+        item.daysResult.forEach(item => {
+          if (item == tempDate.getDay()) daysValid = true;
+        })
+        console.log(daysValid)
+        if (daysValid) {
+          document.querySelector('#audio').play();
+          setIsAlarmNow(item);
+          item.offedToday = true;
+        }
+       
       }
     })
   }
@@ -103,7 +112,7 @@ function App() {
       startAlarms();
       getUserData()
   
-     // document.documentElement.webkitRequestFullScreen();
+     // 
       setDidMount(true);
     }
   })
@@ -114,12 +123,18 @@ function App() {
         {isAlarmNow ? <AlarmPopup alarmItem ={isAlarmNow} closeAlarmPopup={closeAlarmPopup}/> : ''}
         <audio id="audio" src={require('./audio/Hans - pol anthem.mp3')}></audio>
         <audio id="audioChillwave" src={require('./audio/Hans - pol anthem.mp3')}></audio>
+        <audio id="audioSetAlarm" src={require(`./audio/${alarmMusic}.mp3`)}></audio>
         <Header mainColor={mainColor} menuActivateElement={menuActivateElement}/>
 
         <Switch>
           
           <Route path='/alarm'>
-            <Alarm mainColor={mainColor} addAlarm = {addAlarm} arrayOfAlarms={arrayOfAlarms}/>
+            <Alarm
+             mainColor={mainColor}
+             addAlarm = {addAlarm}
+             arrayOfAlarms={arrayOfAlarms}
+             setAlarmMusic={setAlarmMusic}
+              />
           </Route>
 
           <Route path='/'>
