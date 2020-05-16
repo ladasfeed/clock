@@ -45,6 +45,10 @@ class Clock  extends React.Component{
         mArrow.style.transform = `rotateZ(${transformMinutes}deg)`
         hArrow.style.transform = `rotateZ(${transformHours}deg)`
 
+        
+        
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        seconds = seconds < 10 ? '0'+seconds : seconds;
         let newTime = hours+':'+minutes+':'+seconds 
         
        // this.setTempTime(newTime)

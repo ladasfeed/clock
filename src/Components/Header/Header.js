@@ -15,20 +15,26 @@ class Header extends React.Component {
         };
       }
 
+
+
     closeHeader() {
         console.log('??')
         document.querySelector('.header_wrapper').style.transform = 'translateY(-200px)'
+        document.querySelector('.settings_wrapper').style.transform = 'translateY(500px)'
 
         if  (document.querySelector('.show_alarms-wrapper')) {
             document.querySelector('.show_alarms-wrapper').style.transform = 'translateY(-400px)'
             document.querySelector('.set_alarm_title').style.transform = 'translateY(-400px)'
         }
+
+      
     }
 
     
     setTimerCloseHeader() {
 
         document.querySelector('.header_wrapper').style.transform = 'translateY(0px)'
+        document.querySelector('.settings_wrapper').style.transform = 'translateY(0px)'
 
         if  (document.querySelector('.show_alarms-wrapper')) {
             document.querySelector('.show_alarms-wrapper').style.transform = 'translateY(0px)'
@@ -51,14 +57,12 @@ class Header extends React.Component {
     
     componentDidUpdate() {
        
-        if(this.state.didMount && !this.state.func) {
+        // if(this.state.didMount && !this.state.func) {
             
-            this.setState({
-                func: this.setTimerCloseHeader.bind(this)
-            })
-        }
+         
+        // }
 
-        if(this.state.didMount && this.state.func && !this.state.help)
+        if(!this.state.help)
         {
             console.log(this.state.func, this.state.didMount)
             document.addEventListener('mousemove', this.state.func)
@@ -70,13 +74,10 @@ class Header extends React.Component {
     }
 
     componentDidMount() {
-        
-        if (!this.didMount) {
-            this.setState({
-                didMount: true,
-            })
-        }
-        
+      
+        this.setState({
+            func: this.setTimerCloseHeader.bind(this)
+        })
        
     }
    

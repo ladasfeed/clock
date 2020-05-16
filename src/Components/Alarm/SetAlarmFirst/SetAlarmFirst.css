@@ -12,6 +12,7 @@
     justify-content: space-between;
     margin-bottom: 20px;
     width: 100%;
+    align-items: center;
 }
 
 .set_alarm_hours_heading, .set_alarm_minutes_heading {
@@ -23,10 +24,39 @@
     cursor: pointer;
 }
 
-.set_alarm_hours, .set_alarm_minutes {
+.set_alarm_minutes {
     border: none;
     background-color: rgba(#fff, #fff,#fff, 0.5);
     border-radius: 5px;
 }
 
- 
+ .set_alarm_selector {
+     margin: 0px 10px;
+     
+     border-radius: 5px;
+     border: none;
+ }
+
+ .set_alarm_selector:focus {
+    outline: none;
+ }
+ .set_alarm_first input {
+    max-width: 60%;
+}
+
+.set_alarm_hours_wrapper_inner {
+    width: 100%;
+    max-width: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+.set_alarm_controller {
+    cursor: pointer;
+    transition: .3s;
+    font-size: 22px;
+}
+
+.set_alarm_controller:hover{
+    text-shadow: 0px 0px 5px white;
+}

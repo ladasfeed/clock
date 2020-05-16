@@ -61,6 +61,8 @@
 }
 
 .temp_time {
+    font-family: 'Montserrat-SemiBold';
     margin-top: 20px;
     font-size: 35px;
+    letter-spacing: 4px;
 }
