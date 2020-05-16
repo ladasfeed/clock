@@ -9,7 +9,8 @@ class Alarm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tempTime: ''
+            tempTime: '',
+            clockInterval: ''
         }
     }
 
@@ -80,8 +81,14 @@ class Alarm extends React.Component {
             list.style.height = '30px'
     }
 
+    componentWillUnmount() {
+        clearInterval(this.state.clockInterval)
+    }
+
     componentDidMount() {
-        setInterval(() => this.updateClock(), 1000)
+        this.setState({
+            clockInterval: setInterval(() => this.updateClock(), 1000)
+        })
     }
 
   

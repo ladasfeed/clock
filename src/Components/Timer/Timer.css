@@ -1,0 +1,26 @@
+.timer__inner {
+    display: flex;
+    margin-top: 50px;
+    align-items: flex-start;
+    padding: 0px 50px;
+}
+
+.timer__inner__left-content {
+    height: 2px;
+    flex: 1;
+}
+
+.timer__inner__time {
+    flex: 1;
+    text-align: center;
+    font-size: 50px;
+}
+
+.timer__inner__set-timer-wrapper {
+
+    flex: 1;
+}
+
+.set_alarm_first  {
+    position: relative;
+}

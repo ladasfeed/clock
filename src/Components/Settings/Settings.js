@@ -66,6 +66,10 @@ function Settings(props) {
      function changeBackground(event) {
         let newSrc = event.target.getAttribute('src');
         document.querySelector('.app').style.background = `url(${newSrc})`
+
+        let userData = JSON.parse(localStorage.getItem('clocks'));
+        userData.background = newSrc;
+        localStorage.setItem('clocks', JSON.stringify(userData))
      }
 
      function fullscreen() {
@@ -96,7 +100,6 @@ function Settings(props) {
                     </div>
                     <div className="settings_slider_wrapper">
                         <div className="settings_slider_element">
-                            <input type="file" name="f"></input>
                             <div className="settings_change_bg">
                                 <img onClick={(event) => changeBackground(event)} src={require('../../img/Background.png')}></img>
                                 <img onClick={(event) => changeBackground(event)} src={require('../../img/bg2.jpeg')}></img>

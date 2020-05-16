@@ -15,23 +15,22 @@ function SetAlarmFirst(props) {
                 daysResult.push(newIndex);
             }
         })
+
+        const alarmPath = document.querySelector('select').value;
+        props.setAlarmMusic(alarmPath)
+
         props.addAlarm({time, daysResult});
         props.showAlarms();
         props.showAlarms();
     }
 
-    function renderOptionsHours() {
-        let result =[];
-        for (let i = 0; i < 24; i++) {
-            result.push((<option>{i}</option>))
-        }
-        return result;
-    }
+   
 
     function playAlarmMusic() {
         const alarmPath = document.querySelector('select').value;
         props.setAlarmMusic(alarmPath)
-        document.querySelector('#audioSetAlarm').play();
+        setTimeout(() =>document.querySelector('#audioSetAlarm').play(), 100)
+        
     }
 
 
@@ -101,10 +100,19 @@ function SetAlarmFirst(props) {
                 <div className="set_alarm_first__music__selector">
                     <select>
                         <option>
-                            Hans - pol anthem
+                            mozart
                         </option>
                         <option>
-                            Metallcore
+                            dubstep
+                        </option>
+                        <option>
+                            folk
+                        </option>
+                        <option>
+                            fonk
+                        </option>
+                        <option>
+                            deathNote
                         </option>
                     </select>
                 </div>

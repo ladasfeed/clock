@@ -8,7 +8,8 @@ class Clock  extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-          tempTime: ''
+          tempTime: '',
+          clockInterval: ''
         };
       }
 
@@ -67,8 +68,14 @@ class Clock  extends React.Component{
     //     }
     // })
 
+    componentWillUnmount() {
+        clearInterval(this.state.clockInterval)
+    }
+
     componentDidMount() {
-        setInterval(() => this.updateClock(), 1000)
+        this.setState({
+            clockInterval: setInterval(() => this.updateClock(), 1000)
+        })
     }
 
 

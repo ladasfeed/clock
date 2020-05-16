@@ -7,6 +7,8 @@ import Clock from './Components/Clock/Clock'
 import Settings from './Components/Settings/Settings'
 import Alarm from './Components/Alarm/Alarm';
 import AlarmPopup from './Components/Alarm/AlarmPopup/AlarmPopup';
+import Timer from './Components/Timer/Timer';
+
 
 let arrayOfAlarms = [
   {
@@ -24,7 +26,8 @@ function App() {
   let [isAlarmNow, setIsAlarmNow] = useState(false);
   let [mainColor, setMainColor] = useState('black');
   let [userData, setUserData]= useState();
-  let [alarmMusic, setAlarmMusic] = useState('Hans - pol anthem')
+  let [alarmMusic, setAlarmMusic] = useState('folk')
+  let [tempTime, setTempTime] = useState('')
 
   function getUserData() {
     let tempUserData = JSON.parse(localStorage.getItem('clocks'))
@@ -32,6 +35,11 @@ function App() {
       tempUserData.alarms.forEach(item => {
         arrayOfAlarms.push(item);
       })
+    }
+
+    console.log(tempUserData, tempUserData.background)
+    if (tempUserData && tempUserData.background) {
+      document.querySelector('.app').style.backgroundImage = `url(${tempUserData.background})`;
     }
 
     setUserData(localStorage.getItem('clocks'))
@@ -85,6 +93,7 @@ function App() {
        
       }
     })
+    setTempTime(tempTime+':'+tempDate.getSeconds())
   }
 
   function startAlarms() {
@@ -111,7 +120,7 @@ function App() {
     if (!didMount) {
       startAlarms();
       getUserData()
-  
+      
      // 
       setDidMount(true);
     }
@@ -121,12 +130,16 @@ function App() {
     <BrowserRouter>
       <div className="app">
         {isAlarmNow ? <AlarmPopup alarmItem ={isAlarmNow} closeAlarmPopup={closeAlarmPopup}/> : ''}
-        <audio id="audio" src={require('./audio/Hans - pol anthem.mp3')}></audio>
-        <audio id="audioChillwave" src={require('./audio/Hans - pol anthem.mp3')}></audio>
+        <audio id="audio" src={require(`./audio/${alarmMusic}.mp3`)}></audio>
+        <audio id="audioChillwave" src={require('./audio/dubstep.mp3')}></audio>
         <audio id="audioSetAlarm" src={require(`./audio/${alarmMusic}.mp3`)}></audio>
         <Header mainColor={mainColor} menuActivateElement={menuActivateElement}/>
 
         <Switch>
+
+          <Route path='/timer'>
+            <Timer tempTime={tempTime}></Timer>
+          </Route> 
           
           <Route path='/alarm'>
             <Alarm
@@ -140,6 +153,7 @@ function App() {
           <Route path='/'>
             <Clock mainColor={mainColor}/>
           </Route>
+
         </Switch>
         <Settings  mainColor={mainColor} changeGlobalColor={changeGlobalColor}/>
       </div>
