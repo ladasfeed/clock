@@ -4,4 +4,30 @@
     color: white;
     padding: 20px 40px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: 2px solid gray;
+}
+
+.alarm_element_active_changer {
+    cursor: pointer;
+}
+
+.alarm_element_active_changer {
+    margin-top: 20px;
+    background-color: gray;
+    padding: 2px 5px;
+    border-radius: 10px;
+    transition: .3s;
+    margin-right: 20px;
+}
+
+.alarm_element_active_changer:hover {
+    transform: scale(1.1);
+}
+
+.alarm_element__buttons-wrapper {
+    display: flex;
+    width: 100%;
 }

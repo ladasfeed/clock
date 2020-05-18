@@ -9,9 +9,13 @@ function AlarmPopup(props) {
             <div className="alarm_popup_wrapper">
                 <div className="alarm_popup">
                     <div className="alarm_popup_time_wrapper">
-                        {props.alarmItem.time}
+                        {props.alarmItem.time ? props.alarmItem.time : "Time is over"}
+                        
                     </div>
-
+                    <div className="alarm_popup_description">
+                        {props.alarmItem ? props.alarmItem.description : ''}
+                    </div>
+                    
                     <div onClick={props.closeAlarmPopup} className="alarm_popup_close_button">
                         Close
                     </div>

@@ -22,11 +22,16 @@
 }
 
 .alarm_popup_time_wrapper {
-    margin-bottom: 30px;
+   
     font-size: 40px;
 }
 
 .alarm_popup_close_button {
     cursor: pointer;
     text-shadow: 0 0 5px white;
+}
+
+.alarm_popup_description {
+    font-size: 24px;
+    margin-bottom: 30px;
 }

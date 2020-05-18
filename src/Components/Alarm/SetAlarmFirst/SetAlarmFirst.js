@@ -17,9 +17,16 @@ function SetAlarmFirst(props) {
         })
 
         const alarmPath = document.querySelector('select').value;
-        props.setAlarmMusic(alarmPath)
+        const description = document.querySelector('.set_alarm_first__description').value;
 
-        props.addAlarm({time, daysResult});
+        props.addAlarm({
+            time,
+            daysResult,
+            music: alarmPath,
+            active: true,
+            offedToday:false,
+            description: description
+        });
         props.showAlarms();
         props.showAlarms();
     }
@@ -116,11 +123,14 @@ function SetAlarmFirst(props) {
                         </option>
                     </select>
                 </div>
+                
                 <div onClick={playAlarmMusic} className="set_alarm_first__music__play-button">
                     play
                 </div>
                 
             </div>
+
+            <input placeholder="description" className="set_alarm_first__description"></input>
             
             <div onClick={addAlarm} className="set_alarm_first_button">Save</div>
         </div>

@@ -76,6 +76,14 @@ class Clock  extends React.Component{
         this.setState({
             clockInterval: setInterval(() => this.updateClock(), 1000)
         })
+
+
+        setTimeout(() => {
+            const sectionBlock = document.querySelector('.clock_wrapper');
+            sectionBlock.style.opacity = '1'
+            sectionBlock.style.transform = 'translateY(0px)'
+        })
+       
     }
 
 

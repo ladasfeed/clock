@@ -6,6 +6,10 @@
     font-size: 20px;
     transition: .5s;
 
+
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
   
 }
 
@@ -14,6 +18,7 @@
 }
 
 .settings {
+    z-index: 10;
     display: none;
     position: absolute;
     top: 0;
@@ -50,6 +55,20 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    max-height: 300px;
+    overflow-y: scroll;
+
+   
+}
+
+.settings_change_bg::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #aaa; 
+
+}
+.settings_change_bg::-webkit-scrollbar-thumb {
+    background-color: #fff; 
 }
 
 .changer_method {

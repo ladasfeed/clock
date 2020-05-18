@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Settings.css'
+import {SketchPicker} from 'react-color'
+
 
 
 function Settings(props) {
@@ -9,6 +11,7 @@ function Settings(props) {
     let [isDidMount, setIsDidMount] = useState(false);
     let [isBgMusicPlaying, setIsBgMusicPlaying] = useState(false);
     let [isFullscreen, setIsFullscreen] = useState(false);
+    let [color, setColor] = useState('#fff000')
 
     useEffect(()=> {
         if (!isDidMount) {
@@ -16,6 +19,9 @@ function Settings(props) {
             document.querySelector('.changer_method_element').style.color = 'white';
         }
     })
+
+
+   
    
     function closeSettings(event) {
         if (event.target.className == 'settings') {
@@ -28,7 +34,7 @@ function Settings(props) {
 
     function showSettings() {
             document.querySelector('.settings').style.display = 'flex';
-            setTimeout(() => document.querySelector('.settings').style.opacity = '1', 200)
+            setTimeout(() => document.querySelector('.settings').style.opacity = '1')
            
             document.addEventListener('click', (event) => closeSettings(event))
     }
@@ -63,13 +69,21 @@ function Settings(props) {
         }
      }
 
-     function changeBackground(event) {
+     async function changeBackground(event) {
         let newSrc = event.target.getAttribute('src');
         document.querySelector('.app').style.background = `url(${newSrc})`
 
-        let userData = JSON.parse(localStorage.getItem('clocks'));
-        userData.background = newSrc;
-        localStorage.setItem('clocks', JSON.stringify(userData))
+        let userData = await JSON.parse(localStorage.getItem('clocks'));
+
+        if (!userData) {
+            localStorage.setItem('clocks', JSON.stringify({background: newSrc}))
+        } else {
+            userData.background = newSrc;
+            localStorage.setItem('clocks', JSON.stringify(userData))
+        }
+            
+
+        
      }
 
      function fullscreen() {
@@ -81,11 +95,21 @@ function Settings(props) {
             setIsFullscreen(false)
          }
      }
+
+     function renderBackgrounds() {
+        let arrayOfBackgrounds = [];
+        for (let i = 1; i<=10; i++) {
+            arrayOfBackgrounds.push(
+                <img onClick={(event) => changeBackground(event)} src={require(`../../img/bg${i}.jpg`)}></img>
+            )
+        }
+        return arrayOfBackgrounds;
+     }
  
 
     return (
-        <div className="settings_wrapper">
-            <div className="settings">
+        <>
+        <div className="settings">
                 <div className="settings_inner">
                     <div className="changer_method">
                         <div onClick={(event) => changeSettigns(event, 0)} className="changer_method_element">
@@ -101,18 +125,20 @@ function Settings(props) {
                     <div className="settings_slider_wrapper">
                         <div className="settings_slider_element">
                             <div className="settings_change_bg">
-                                <img onClick={(event) => changeBackground(event)} src={require('../../img/Background.png')}></img>
+                                {/* <img onClick={(event) => changeBackground(event)} src={require('../../img/Background.png')}></img>
                                 <img onClick={(event) => changeBackground(event)} src={require('../../img/bg2.jpeg')}></img>
                                 <img onClick={(event) => changeBackground(event)} src={require('../../img/bg3.jpg')}></img>
-                                <img onClick={(event) => changeBackground(event)} src={require('../../img/bg4.jpg')}></img>
+                                <img onClick={(event) => changeBackground(event)} src={require('../../img/bg4.jpg')}></img> */}
+                                {renderBackgrounds()}
                             </div>
                         </div>
                         <div className="settings_slider_element">
                             <div className="global_color_changer_wrapper">
-                                <input placeholder="enter a color..." className="global_color_changer">
-
-                                </input>
-                                <div onClick={props.changeGlobalColor} className="global_color_changer-button">change color</div>
+                                    < SketchPicker
+                                        color={color}
+                                        onChangeComplete = {(color) => {setColor(color.hex)}}
+                                    />
+                                <div onClick={() => props.changeGlobalColor(color)} className="global_color_changer-button">change color</div>
                             </div>
                         </div>
                         <div className="settings_slider_element">
@@ -125,6 +151,8 @@ function Settings(props) {
                     </div>
                 </div>
             </div>
+        <div className="settings_wrapper">
+            
             <div className="settings_buttons_wrapper">
                 <div style={{color: props.mainColor}} onClick={showSettings} className="settings_button">
                     Settings
@@ -134,6 +162,7 @@ function Settings(props) {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

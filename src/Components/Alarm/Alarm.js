@@ -74,11 +74,12 @@ class Alarm extends React.Component {
 
 
     showAlarms() {
-        let list = document.querySelector('.show_alarms-wrapper');
-        if (list.style.height == '30px'|| !list.style.height)
-            list.style.height = this.props.arrayOfAlarms.length*61+30+'px';
+        let list = document.querySelector('.show_alarms__alarms');
+        if (!list.style.height || list.style.height=='0px')
+            // list.style.height = this.props.arrayOfAlarms.length*127+30+'px';
+            list.style.height = '40vh';
         else 
-            list.style.height = '30px'
+            list.style.height = '0'
     }
 
     componentWillUnmount() {
@@ -88,6 +89,11 @@ class Alarm extends React.Component {
     componentDidMount() {
         this.setState({
             clockInterval: setInterval(() => this.updateClock(), 1000)
+        })
+        setTimeout(()=> {
+            const sectionBlock = document.querySelector('.clock_wrapper');
+            sectionBlock.style.opacity = '1';
+            sectionBlock.style.transform = 'translateY(0px)'
         })
     }
 
@@ -102,10 +108,12 @@ class Alarm extends React.Component {
                
                 <div className="main_clock">
                     <div className="show_alarms-wrapper">
-                        <div onClick={() => this.showAlarms()} className="show_alarms_button">Show</div>
-                        { this.props.arrayOfAlarms.map(item => {
-                            return <AlarmElement alarmElement = {item} />
+                        <div onClick={() => this.showAlarms()} style={{color: this.props.mainColor}} className="show_alarms_button">Show</div>
+                        <div className="show_alarms__alarms">
+                        { this.props.arrayOfAlarms.map((item, index) => {
+                            return <AlarmElement deleteAlarm={this.props.deleteAlarm} showAlarms={this.showAlarms} id={index} alarmElement = {item} />
                         })}
+                        </div>
                     </div>
                     <div style={{border: '4px solid ' +  this.props.mainColor}} className="circle_clock">
                         <div style={{backgroundColor:  this.props.mainColor}}   className="second_arrow">
@@ -122,7 +130,7 @@ class Alarm extends React.Component {
                         </div>
                     </div>
                     <div className="set_alarms-wrapper">
-                       <div onClick={() => this.showSetAlarm()} className="set_alarm_title">
+                       <div style={{color: this.props.mainColor}} onClick={() => this.showSetAlarm()} className="set_alarm_title">
                            Set alarm
                        </div>
     

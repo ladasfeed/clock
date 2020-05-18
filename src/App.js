@@ -12,11 +12,21 @@ import Timer from './Components/Timer/Timer';
 
 let arrayOfAlarms = [
   {
-    time: '15:5',
+    time: '7:30',
     offedToday: false,
-    days: [1, 2]
+    daysResult: [1, 2, 3, 4, 5],
+    description: 'halo',
+    music: require('./audio/folk.mp3'),
+    active: true
   }
 ]
+
+let timer={
+  id:'',
+  time: null
+};
+
+let isTimerPaused = false;
 
 function App() {
 
@@ -27,7 +37,9 @@ function App() {
   let [mainColor, setMainColor] = useState('black');
   let [userData, setUserData]= useState();
   let [alarmMusic, setAlarmMusic] = useState('folk')
+  let [timerMusic, setTimerMusic] = useState('folk')
   let [tempTime, setTempTime] = useState('')
+  let [stopperTimer, setStopperTimer] = useState(true)
 
   function getUserData() {
     let tempUserData = JSON.parse(localStorage.getItem('clocks'))
@@ -37,10 +49,21 @@ function App() {
       })
     }
 
-    console.log(tempUserData, tempUserData.background)
+  
     if (tempUserData && tempUserData.background) {
       document.querySelector('.app').style.backgroundImage = `url(${tempUserData.background})`;
     }
+
+    if (tempUserData && tempUserData.color) {
+      setMainColor(tempUserData.color)
+
+      let headerIcons = Array.from(document.querySelectorAll('svg'));
+      headerIcons.forEach(item => {
+        item.setAttribute("fill", tempUserData.color)
+      })
+    }
+
+    
 
     setUserData(localStorage.getItem('clocks'))
   }
@@ -57,9 +80,12 @@ function App() {
         alarms: []
       };
     } else {
-      newUserState = JSON.parse(userData);
+      newUserState = JSON.parse(localStorage.getItem('clocks'));
+      if (!newUserState.alarms) {
+        newUserState.alarms = [];
+      } 
     }
-    
+    console.log(newUserState)
     newUserState.alarms.push(time)
     setUserData(newUserState)
     localStorage.setItem('clocks', JSON.stringify(newUserState))
@@ -85,7 +111,8 @@ function App() {
           if (item == tempDate.getDay()) daysValid = true;
         })
         console.log(daysValid)
-        if (daysValid) {
+        if (daysValid && item.active) {
+          document.querySelector('#audio').src = require(`./audio/${item.music}.mp3`);
           document.querySelector('#audio').play();
           setIsAlarmNow(item);
           item.offedToday = true;
@@ -101,6 +128,10 @@ function App() {
   }
 
 
+  function showTimerPopup() {
+      
+  }
+
 
   function closeAlarmPopup() {
     setIsAlarmNow(false);
@@ -109,12 +140,73 @@ function App() {
   }
 
   //for Settings
-  function changeGlobalColor() {
-    let newColor = document.querySelector('.global_color_changer').value;
-    setMainColor(newColor)
+  async function changeGlobalColor(color) {
+    let userData = await JSON.parse(localStorage.getItem('clocks'));
+
+    if (!userData) {
+      userData = {}
+    }
+    userData.color = color;
+    localStorage.setItem('clocks', JSON.stringify(userData))
+    
+    let headerIcons = Array.from(document.querySelectorAll('svg'));
+    headerIcons.forEach(item => {
+      item.setAttribute("fill", color)
+    })
+        
+    setMainColor(color)
     console.log('?')
   }
 
+
+  //forTimer
+  function stopTimer() {
+    clearTimeout(timer.id)
+    timer.time = null;
+    setStopperTimer(false)
+    setTimeout(()=>setStopperTimer(true), 0)
+  }
+
+
+  function checkTimer(time) {
+    if (!stopperTimer ) return
+
+    console.log(isTimerPaused)
+    if (isTimerPaused) {
+      timer.id = setTimeout(()=>checkTimer(timer.time), 1000)
+      return
+    }
+
+    if (timer.time === 0) {
+      document.querySelector('#audio').src = require(`./audio/${timerMusic}.mp3`);
+      document.querySelector('#audio').play();
+      setIsAlarmNow({});
+      return
+    }
+    
+    if (timer.time===null) {
+      timer.time=time.time.seconds + time.time.minutes*60;
+      timer.id = setTimeout(()=>checkTimer(timer.time), 1000)
+    } else {
+      if (!stopperTimer) return
+      timer.time--;
+      timer.id = setTimeout(()=>checkTimer(timer.time), 1000)
+    }
+  }
+
+  function pauseTimer() {
+    isTimerPaused = !isTimerPaused
+  }
+
+
+  function deleteAlarm(id) {
+    arrayOfAlarms = arrayOfAlarms.filter((item,index) => {
+       return index!=id
+    })
+  }
+
+
+  ///
 
   useEffect(() => {
     if (!didMount) {
@@ -131,14 +223,23 @@ function App() {
       <div className="app">
         {isAlarmNow ? <AlarmPopup alarmItem ={isAlarmNow} closeAlarmPopup={closeAlarmPopup}/> : ''}
         <audio id="audio" src={require(`./audio/${alarmMusic}.mp3`)}></audio>
-        <audio id="audioChillwave" src={require('./audio/dubstep.mp3')}></audio>
+        <audio id="audioChillwave" src={require('./audio/relax.mp3')}></audio>
         <audio id="audioSetAlarm" src={require(`./audio/${alarmMusic}.mp3`)}></audio>
+        <audio id="audioSetTimer" src={require(`./audio/${timerMusic}.mp3`)}></audio>
         <Header mainColor={mainColor} menuActivateElement={menuActivateElement}/>
-
+        
         <Switch>
 
           <Route path='/timer'>
-            <Timer tempTime={tempTime}></Timer>
+            <Timer
+              tempTime={tempTime}
+              mainColor={mainColor}
+              setTimerMusic={setTimerMusic}
+              checkTimer={checkTimer}
+              timer={Math.trunc(timer.time/60) + ':' +timer.time%60}
+              stopTimer={stopTimer}
+              pauseTimer={pauseTimer}
+            ></Timer>
           </Route> 
           
           <Route path='/alarm'>
@@ -147,6 +248,7 @@ function App() {
              addAlarm = {addAlarm}
              arrayOfAlarms={arrayOfAlarms}
              setAlarmMusic={setAlarmMusic}
+             deleteAlarm={deleteAlarm}
               />
           </Route>
 
