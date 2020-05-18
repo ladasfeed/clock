@@ -18,19 +18,24 @@ function SetAlarmFirst(props) {
 
         const alarmPath = document.querySelector('select').value;
         const description = document.querySelector('.set_alarm_first__description').value;
-
+        const volume = (document.querySelector('.set_alarm_volume').value/100).toFixed(2);
         props.addAlarm({
             time,
             daysResult,
             music: alarmPath,
             active: true,
             offedToday:false,
-            description: description
+            description: description,
+            volume: volume
         });
         props.showAlarms();
         props.showAlarms();
     }
 
+
+    function setVolume(event) {
+        document.querySelector('#audioSetAlarm').volume = (event.target.value/100).toFixed(2);
+    }
    
 
     function playAlarmMusic() {
@@ -103,31 +108,36 @@ function SetAlarmFirst(props) {
                 
             </div>
 
-            <div className="set_alarm_first__music">
-                <div className="set_alarm_first__music__selector">
-                    <select>
-                        <option>
-                            mozart
-                        </option>
-                        <option>
-                            dubstep
-                        </option>
-                        <option>
-                            folk
-                        </option>
-                        <option>
-                            fonk
-                        </option>
-                        <option>
-                            deathNote
-                        </option>
-                    </select>
+            
+            <div>
+                <div className="set_alarm_first__music">
+                    
+                    <div className="set_alarm_first__music__selector">
+                        <select>
+                            <option>
+                                mozart
+                            </option>
+                            <option>
+                                dubstep
+                            </option>
+                            <option>
+                                folk
+                            </option>
+                            <option>
+                                fonk
+                            </option>
+                            <option>
+                                deathNote
+                            </option>
+                        </select>
+                    </div>
+                    
+                    <div onClick={playAlarmMusic} className="set_alarm_first__music__play-button">
+                        play
+                    </div>
+                    
                 </div>
-                
-                <div onClick={playAlarmMusic} className="set_alarm_first__music__play-button">
-                    play
-                </div>
-                
+                <input className="set_alarm_volume" onChange={(event)=>setVolume(event)} type="range" min="00" max="100" step="1"></input>
             </div>
 
             <input placeholder="description" className="set_alarm_first__description"></input>

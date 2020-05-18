@@ -6,12 +6,21 @@ class Timer extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isTimerSet: false
+            isTimerSet: false,
+            isTimerPaused: false
         }
     }
 
     pauseTimer() {
-        if (this.state.isTimerSet) {
+        if (!this.state.isTimerPaused) {
+            this.setState({
+                isTimerPaused: true
+            })
+            this.props.pauseTimer()
+        } else {
+            this.setState({
+                isTimerPaused: false
+            })
             this.props.pauseTimer()
         }
     }
@@ -141,8 +150,8 @@ class Timer extends React.Component {
                                     </div>
                                     
                                     
-                                    <div onClick={()=>this.addTimer()} className="set_alarm_first_button">Save</div>
-                                    <div onClick={()=>this.pauseTimer()} className="set_alarm_first_button-stop">Pause</div>
+                                    <div onClick={()=>this.addTimer()} className="set_alarm_first_button">{this.state.isTimerSet ? 'Stop' : 'Set'}</div>
+                                    <div onClick={()=>this.pauseTimer()} className="set_alarm_first_button-stop">{this.state.isTimerPaused ? 'Continue' : 'Pause'}</div>
                                 </div>
                             </div>
                         </div>

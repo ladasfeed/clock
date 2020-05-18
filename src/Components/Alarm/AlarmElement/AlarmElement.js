@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import './AlarmElement.css'
-import Alarm from '../Alarm';
 
 
 function AlarmElement(props) {

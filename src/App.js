@@ -17,6 +17,7 @@ let arrayOfAlarms = [
     daysResult: [1, 2, 3, 4, 5],
     description: 'halo',
     music: require('./audio/folk.mp3'),
+    volume: 0.6,
     active: true
   }
 ]
@@ -112,8 +113,10 @@ function App() {
         })
         console.log(daysValid)
         if (daysValid && item.active) {
-          document.querySelector('#audio').src = require(`./audio/${item.music}.mp3`);
-          document.querySelector('#audio').play();
+          let musicElement = document.querySelector('#audio');
+          musicElement.src = require(`./audio/${item.music}.mp3`);
+          musicElement.volume = item.volume;
+          musicElement.play();
           setIsAlarmNow(item);
           item.offedToday = true;
         }

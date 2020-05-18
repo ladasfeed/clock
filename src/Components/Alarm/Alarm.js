@@ -59,11 +59,6 @@ class Alarm extends React.Component {
         
     }
 
-
-    
-
-    
-
     showSetAlarm() {
         let AlarmWindow = document.querySelector('.set_alarm_window-first');
         if (AlarmWindow.style.transform == 'scaleY(0)' || !AlarmWindow.style.transform)
